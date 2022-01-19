@@ -397,40 +397,49 @@ function ShipDamage(p)
 	end
 end
 
-function DeviceSpawn(p)
+function DeviceChanged(p)
+	for i = 0, GetTableSize(p.spawned)-1 do
+		DeviceSpawn(p.spawned[i])
+	end
+	for i = 0, GetTableSize(p.despawned)-1 do
+		DeviceDespawn(p.despawned[i])
+	end
+end
+
+function DeviceSpawn(anID)
 	local onCurrentShip = false
 	local trans = avatar.GetObservedTransport()
 	if trans and transport.CanDrawInterface(trans) then
 		for i, v in pairs(transport.GetDevices(trans)) do
-			if v == p.id then
+			if v == anID then
 				onCurrentShip = true
 			end
 		end
 		if onCurrentShip then
-			local devType = device.GetUsableDeviceType(p.id)
+			local devType = device.GetUsableDeviceType(anID)
 			if devType ~= USDEV_SCANER then
 				local notPlaced = true
 				for i, v in pairs(Device) do
-					if tonumber(p.id) == tonumber(i) then
+					if tonumber(anID) == tonumber(i) then
 						notPlaced = false
 					end
 				end
 				if notPlaced then
-					DeviceCreate(p.id)
+					DeviceCreate(anID)
 				end
 			end
 		end
 	end
 end
 
-function DeviceDespawn(p)
-	if Device[p.id] and not string.find(Device[p.id]:GetName(), "Shield") then
-		Device[p.id]:DestroyWidget()
-		Device[p.id] = nil
+function DeviceDespawn(anID)
+	if Device[anID] and not string.find(Device[anID]:GetName(), "Shield") then
+		Device[anID]:DestroyWidget()
+		Device[anID] = nil
 	end
 end
 
-function ChestSpawn()
+function ChestChanged()
 	local trans = avatar.GetObservedTransport()
 	if trans and transport.CanDrawInterface(trans) then
 		local chests = 0
@@ -556,10 +565,9 @@ function Init()
 	common.RegisterEventHandler( ReactorChanged, "EVENT_TRANSPORT_ENERGY_CHANGED" )
 	common.RegisterEventHandler( EmanChanged, "EVENT_TRANSPORT_INSIGHT_CHANGED" )
 	common.RegisterEventHandler( ShipDamage, "EVENT_SHIP_DAMAGE_RECEIVED" )
-	common.RegisterEventHandler( ChestSpawn, "EVENT_DEVICE_DESPAWNED")
-	common.RegisterEventHandler( ChestSpawn, "EVENT_DEVICE_SPAWNED")
-	common.RegisterEventHandler( DeviceSpawn, "EVENT_USABLE_DEVICE_SPAWNED")
-	common.RegisterEventHandler( DeviceDespawn, "EVENT_USABLE_DEVICE_DESPAWNED")
+	common.RegisterEventHandler( ChestChanged, "EVENT_DEVICES_CHANGED")
+	common.RegisterEventHandler( DeviceChanged, "EVENT_USABLE_DEVICES_CHANGED")
+
 	
 	common.RegisterEventHandler( ConfigInitEvent, "CONFIG_INIT_EVENT" )
 	common.RegisterEventHandler( ConfigEvent, "CONFIG_EVENT_"..common.GetAddonName())
