@@ -29,9 +29,6 @@
 		<Item href="NavCooldown.lua"/>
 		<Item href="ShipHUD.lua"/>
 	</ScriptFileRefs>
-
-  <texts href=""/>
-  <textures href="Widgets/Textures/Textures.xdb#xpointer(/UIRelatedTextures)"/>
   <visObjects href=""/>
  
 <addon_name>TargetShipInfo</addon_name>
