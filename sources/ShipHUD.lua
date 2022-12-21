@@ -583,7 +583,7 @@ function Init()
 	mainForm:SetPriority(10000)
 	
 	TooltipText:SetPriority(10)
-	local template = createWidget(nil, "Template", "Template")
+	local template = getChild(mainForm, "Template")
 	setTemplateWidget(template)
 	local btn = createWidget(ShipPanel, "DevicesButton", "Button", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 30, 25, 0, 0)
 	setText(btn, "ND")

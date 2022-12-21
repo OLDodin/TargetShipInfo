@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <WidgetForm>
-	<Name>ShipHUD</Name>
+	<Name>TargetShipInfo_ShipHUD</Name>
 	<Priority>5100</Priority>
 	<Children>
 		<Item href="MainPanel.(WidgetPanel).xdb#xpointer(/WidgetPanel)" />
+		<Item href="Templates/Main.xdb#xpointer(/WidgetPanel)"/>
 	</Children>
 	<Placement>
 		<X>

@@ -34,7 +34,7 @@ end
 
 local function CreateTemplates()
 	for i=0, 12 do
-		setTemplateWidget(m_navigatorForm)
+		setTemplateWidget(m_template)
 		local result = {}
 		result.widget = createWidget(m_navigatorForm, "sp"..i, "SpellView", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 50, 70, 10+i*60, 22)
 		result.Image = result.widget:GetChildChecked("Image", false)
@@ -54,7 +54,7 @@ local function UpdateProgreesBar(aMin, aMax, aCurr, aProgressBar)
 	local realRect = aProgressBar:GetRealRect()
 	local backgroundWidget = aProgressBar:GetChildChecked("Background", false)
 	local origPlacement = backgroundWidget:GetPlacementPlain ()
-	local placement = CopyTable(origPlacement)
+	local placement = copyTable(origPlacement)
 	placement.alignX = WIDGET_ALIGN_LOW_ABS
 	local percent = (value - minimum) / (maximum - minimum)
 	placement.sizeX = (realRect.x2 - realRect.x1) * percent
@@ -140,7 +140,6 @@ local function UpdatePanel()
 		end
 	else
 		local devices = transport.GetDevices( transportId )
-
 		for k, deviceId in pairs( devices ) do
 			local deviceType = device.GetUsableDeviceType( deviceId )
 			if deviceType == USDEV_NAVIGATOR then			
@@ -161,7 +160,6 @@ local function UpdatePanel()
 						setText(header, m_headerTxt, "ColorWhite",  "center", 12)	
 					end
 					if not m_navigatorPanel[i] then
-						setTemplateWidget(m_navigatorForm)
 						local result = m_templateActionsItem[i]
 						result.Image:SetBackgroundTexture(action.image)				
 						show(result.widget)
@@ -239,7 +237,7 @@ function InitNavCoolDown()
 	if not g_showCoolDown then
 		return
 	end 
-	m_template = createWidget(nil, "Template", "Template")
+	m_template = getChild(mainForm, "Template")
 	setTemplateWidget(m_template)
 	m_myMainForm = createWidget(mainForm, "NavigatorForm", "Panel", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 580, 94, 660, 0)
 	m_myMainForm:SetBackgroundColor({r=0;g=0;b=0;a=0})
@@ -258,8 +256,7 @@ function InitNavCoolDown()
 	AddReaction("NavigatorCDButton", function () ChangeNavWndVisible() end)
 	ChangeNavWndVisible()
 	
-	startTimer("updateTimer", "EVENT_UPADATE_PANEL_TIMER", 0.25)
-	common.RegisterEventHandler(UpdatePanel, "EVENT_UPADATE_PANEL_TIMER")
+	startTimer("updateTimer", UpdatePanel, 0.25)
 	common.RegisterEventHandler(AvatarShipChanged, "EVENT_AVATAR_TRANSPORT_CHANGED")
 
 	AvatarShipChanged()

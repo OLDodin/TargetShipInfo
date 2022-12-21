@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<WidgetForm>
-	<Name>FPSIncrease</Name>
+<WidgetPanel>
+	<Name>TargetShipInfo</Name>
 	<Priority>4550</Priority>
 	<BackLayer href="" />
 	<FrontLayer href="" />
@@ -19,4 +19,4 @@
 	<Enabled>true</Enabled>
 	<TransparentInput>false</TransparentInput>
 	<PickChildrenOnly>true</PickChildrenOnly>
-</WidgetForm>
+</WidgetPanel>
