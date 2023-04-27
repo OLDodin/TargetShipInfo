@@ -594,7 +594,7 @@ function Init()
 	setText(m_shipNotFoundHeader, "Нет цели", "ColorYellow", "center")
 	
 	
-	DnD:Init( ShipPanel, btn, true)
+	DnD.Init( ShipPanel, btn, true)
 	AvatarShip()
 end
 --------------------------------------------------------------------------------

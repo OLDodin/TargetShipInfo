@@ -246,7 +246,7 @@ function InitNavCoolDown()
 	
 	m_navigatorBtn = createWidget(m_myMainForm, "NavigatorCDButton", "Button", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 30, 25, 0, 0)
 	setText(m_navigatorBtn, "NC")
-	DnD:Init(m_myMainForm, m_navigatorBtn, true)
+	DnD.Init(m_myMainForm, m_navigatorBtn, true)
 	
 	common.RegisterReactionHandler(ButtonPressed, "execute")
 	
