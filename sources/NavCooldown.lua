@@ -161,7 +161,7 @@ local function UpdatePanel()
 					end
 					if not m_navigatorPanel[i] then
 						local result = m_templateActionsItem[i]
-						result.Image:SetBackgroundTexture(action.image)				
+						result.Image:SetBackgroundTexture(action.image)		
 						show(result.widget)
 						m_navigatorPanel[i] = {}
 						m_navigatorPanel[i].lastRemaining = VERY_BIG_CD
@@ -246,7 +246,7 @@ function InitNavCoolDown()
 	
 	m_navigatorBtn = createWidget(m_myMainForm, "NavigatorCDButton", "Button", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 30, 25, 0, 0)
 	setText(m_navigatorBtn, "NC")
-	DnD.Init(m_myMainForm, m_navigatorBtn, true)
+	DnD.Init(m_myMainForm, m_navigatorBtn, true, true, {0, -500, -60, 0})
 	
 	common.RegisterReactionHandler(ButtonPressed, "execute")
 	

@@ -287,10 +287,7 @@ function EmanChanged( params )
 end
 
 function SlashCommand( params )
-	if common.IsSubstring(params.text, userMods.ToWString("/shuddnd")) then
-		local DragPanel = Ship:GetChildChecked("DragPanel", false)
-		DragPanel:Show(not DragPanel:IsVisible())
-	elseif common.IsSubstring(params.text, userMods.ToWString("/shudtop")) then
+	if params.text and params.text:IsContain(userMods.ToWString("/shudtop"), true) then
 		if mainForm:GetPriority() == 10000 then
 			mainForm:SetPriority(3000)
 		else
@@ -594,7 +591,7 @@ function Init()
 	setText(m_shipNotFoundHeader, "Нет цели", "ColorYellow", "center")
 	
 	
-	DnD.Init( ShipPanel, btn, true)
+	DnD.Init( ShipPanel, btn, true, true, {0, -120, -200, 0})
 	AvatarShip()
 end
 --------------------------------------------------------------------------------
