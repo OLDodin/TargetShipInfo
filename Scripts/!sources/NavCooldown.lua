@@ -2,8 +2,6 @@ local m_myMainForm = nil
 local m_navigatorForm = nil		
 local m_navigatorBtn = nil		
 
-local m_template = nil
-
 local m_navigatorPanel = nil
 local m_currTransportID = nil
 
@@ -32,8 +30,8 @@ local function ClearWidgets()
 end
 
 local function CreateTemplates()
+	setTemplateWidget("spell")
 	for i=0, 12 do
-		setTemplateWidget(m_template)
 		local result = {}
 		result.widget = createWidget(m_navigatorForm, "sp"..i, "SpellView", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 50, 70, 10+i*60, 22)
 		result.Image = result.widget:GetChildChecked("Image", false)
@@ -206,7 +204,7 @@ function ChangeNavWndVisible()
 end
 
 local function InitNavigatorForm()
-	setTemplateWidget(m_template)
+	setTemplateWidget("common")
 	
 	local form=createWidget(m_myMainForm, "NavigatorForm", "Panel", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 550, 94, 30, 0)
 	priority(form, 5500)
@@ -220,14 +218,13 @@ function InitNavCoolDown()
 	if not g_showCoolDown then
 		return
 	end 
-	m_template = getChild(mainForm, "Template")
-	setTemplateWidget(m_template)
+	setTemplateWidget("common")
 	m_myMainForm = createWidget(mainForm, "NavigatorForm", "Panel", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 580, 94, 660, 0)
 	m_myMainForm:SetBackgroundColor({r=0;g=0;b=0;a=0})
 	
 	m_navigatorForm = InitNavigatorForm()
 	
-	m_navigatorBtn = createWidget(m_myMainForm, "NavigatorCDButton", "Button", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 30, 25, 0, 0)
+	m_navigatorBtn = createWidget(m_myMainForm, "NavigatorCDButton", "Button", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 32, 32, 0, 0)
 	setText(m_navigatorBtn, "NC")
 	DnD.Init(m_myMainForm, m_navigatorBtn, true, true, {0, -500, -60, 0})
 	

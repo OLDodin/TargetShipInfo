@@ -16,7 +16,17 @@
 		<Item href="Scripts/NavCooldown.lua"/>
 		<Item href="Scripts/ShipHUD.lua"/>
 	</ScriptFileRefs>
-  <visObjects href=""/>
+	<widgetGroups>
+		<Item>
+			<groupName>common</groupName>
+			<widgets href="Widgets/Resources/common/WidgetTemplates.xdb" />
+		</Item>
+		<Item>
+			<groupName>spell</groupName>
+			<widgets href="Widgets/Resources/spell/WidgetTemplates.xdb" />
+		</Item>
+	</widgetGroups>
+	<visObjects href=""/>
  
 <addon_name>TargetShipInfo</addon_name>
 <author>OLDodin</author>

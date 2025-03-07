@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WidgetPanel>
+  <Name>SpellView</Name>
+  <Children>
+    <Item href="ProgressBar\ProgressBar.(WidgetPanel).xdb"/>
+    <Item href="Cooldown\TextView.(WidgetTextView).xdb"/>
+    <Item href="Image\Panel.(WidgetPanel).xdb"/>
+  </Children>
+  <BackLayer href="" />
+  <FrontLayer href="" />
+  <Placement>
+    <X>
+      <Align>WIDGET_ALIGN_LOW</Align>
+      <Pos>0</Pos>
+      <Size>50</Size>
+    </X>
+    <Y>
+      <Align>WIDGET_ALIGN_LOW</Align>
+      <Pos>0</Pos>
+      <Size>70</Size>
+    </Y>
+  </Placement>
+  <Visible>false</Visible>
+  <TransparentInput>false</TransparentInput>
+  <PickChildrenOnly>false</PickChildrenOnly>
+  <clipContent>false</clipContent>
+</WidgetPanel>
