@@ -219,12 +219,11 @@ function InitNavCoolDown()
 		return
 	end 
 	setTemplateWidget("common")
-	m_myMainForm = createWidget(mainForm, "NavigatorForm", "Panel", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 580, 94, 660, 0)
-	m_myMainForm:SetBackgroundColor({r=0;g=0;b=0;a=0})
+	m_myMainForm = createWidget(mainForm, "NavigatorForm", "PanelTransparent", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 580, 94, 660, 0)
 	
 	m_navigatorForm = InitNavigatorForm()
 	
-	m_navigatorBtn = createWidget(m_myMainForm, "NavigatorCDButton", "Button", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 32, 32, 0, 0)
+	m_navigatorBtn = createWidget(m_myMainForm, "NavigatorCDButton", "Button", WIDGET_ALIGN_LOW, WIDGET_ALIGN_LOW, 30, 25, 0, 0)
 	setText(m_navigatorBtn, "NC")
 	DnD.Init(m_myMainForm, m_navigatorBtn, true, true, {0, -500, -60, 0})
 	
