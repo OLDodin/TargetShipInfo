@@ -394,11 +394,11 @@ function ShipDamage(p)
 end
 
 function DeviceChanged(p)
-	for i = 0, GetTableSize(p.spawned)-1 do
-		DeviceSpawn(p.spawned[i])
+	for _, spawnedID in ipairs(p.spawned) do
+		DeviceSpawn(spawnedID)
 	end
-	for i = 0, GetTableSize(p.despawned)-1 do
-		DeviceDespawn(p.despawned[i])
+	for _, despawnedID in ipairs(p.despawned) do
+		DeviceDespawn(despawnedID)
 	end
 end
 

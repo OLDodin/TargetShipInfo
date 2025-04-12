@@ -43,10 +43,32 @@ local originRegisterEventHandler = common.RegisterEventHandler
 local originUnRegisterEventHandler = common.UnRegisterEventHandler
 local m_callingTable = {}
 
+local function MergeCallInfo(aEventProfile_1, aEventProfile_2)
+	local newInfo = {}
+	newInfo.MaxWorkingTime = math.max(aEventProfile_1.MaxWorkingTime, aEventProfile_2.MaxWorkingTime)
+	newInfo.TotalWorkingTime = aEventProfile_1.TotalWorkingTime + aEventProfile_2.TotalWorkingTime
+	newInfo.CallCount = aEventProfile_1.CallCount + aEventProfile_2.CallCount
+	newInfo.EventName = aEventProfile_1.EventName
+	
+	return newInfo
+end
+
 function ProfilePrint()
 	LogInfo("========================================", "=")
+	local callTableByNames = {}
+	
 	for _, profileCaller in ipairs(m_callingTable) do
-		profileCaller:PrintInfo()
+		if callTableByNames[profileCaller.EventName] then
+			callTableByNames[profileCaller.EventName] = MergeCallInfo(callTableByNames[profileCaller.EventName], profileCaller)
+		else
+			callTableByNames[profileCaller.EventName] = profileCaller
+		end
+	end
+	
+	for _, profileCaller in pairs(callTableByNames) do
+		if profileCaller.CallCount > 0 then
+			LogInfo(profileCaller.EventName, " max = ", profileCaller.MaxWorkingTime, " avg = ", profileCaller.TotalWorkingTime/profileCaller.CallCount, " cnt = ", profileCaller.CallCount)
+		end
 	end
 	LogInfo("========================================", "=")
 end
@@ -87,11 +109,13 @@ end
 --------------------------------------------------------------------------------
 -- Helper functions
 --------------------------------------------------------------------------------
+local cachedNKeys = table.nkeys
+
 function GetTableSize( t )
 	if not t then
 		return 0
 	end
-	return table.nkeys(t)
+	return cachedNKeys(t)
 end
 --------------------------------------------------------------------------------
 -- Logging helpers
@@ -144,7 +168,7 @@ function LogTable( t, tabstep )
 		LogInfo( "nil (no table)" )
 		return
 	end
-	assert( type( t ) == "table", "Invalid data passed" )
+	assert( type( t ) == "table", "Invalid data passed " )
 	local TabString = string.rep( "    ", tabstep )
 	local isEmpty = true
 	for i, v in pairs( t ) do
@@ -152,7 +176,7 @@ function LogTable( t, tabstep )
 			LogInfo( TabString, i, ":" )
 			LogTable( v, tabstep + 1 )
 		else
-			LogInfo( TabString, i, " = ", v )
+			LogInfo( TabString, i, " = ", tostring(v) )
 		end
 		isEmpty = false
 	end

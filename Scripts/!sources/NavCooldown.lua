@@ -142,7 +142,7 @@ local function UpdatePanel()
 			local deviceType = device.GetUsableDeviceType( deviceId )
 			if deviceType == USDEV_NAVIGATOR then			
 				local info = avatar.GetUsableDeviceInfo( deviceId )
-
+				
 				for i = 0, GetTableSize( info.actions ) - 1 do
 					local action = info.actions[i]
 					--create
